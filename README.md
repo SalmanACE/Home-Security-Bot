@@ -1,4 +1,4 @@
-# Raspberry Pi Security System
+# Home Security Bot
 
 A simple security system to run on a [Raspberry Pi](https://www.raspberrypi.org/).
 
@@ -36,7 +36,7 @@ One of my main goals was to have the system completely automatic. I didn't want 
 After much testing I used an approach that mixes active (ARP ping) and passive (packet capture) detection over the Wi-Fi adapter based on knowing the MAC addresses of the mobile phones. The mobile phone MAC addresses are set in the configuration and rpi-security captures packets on a monitor mode interface with the following filter:
 
 1. Wi-Fi probe requests from any of the configured MACs.
-2. Any packets sent from the configured MACs to the host running rpi-security.
+2. Any packets sent from the configured MACs to the host running Home Security Bot.
 
 The application resets a counter when packets are detected and if the counter goes longer than ~10 minutes the system is armed. To eliminate the many false alarms, when transitioning between an armed/disarmed state, the application performs an ARP scan directed at each of the configured MAC addresses to be sure they are definitely online or offline. Both iOS and Android will respond to this ARP scan 99% of the time where a ICMP ping is quite unreliable. By combining the capture of Wi-Fi probe requests and using ARP scanning, the Wi-Fi frequency doesn't matter because mobile phones send probe requests on both frequencies and ARP scan works across both frequencies too.
 
