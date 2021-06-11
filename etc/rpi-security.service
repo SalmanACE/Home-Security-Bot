@@ -1,0 +1,18 @@
+[Unit]
+Description=rpi-security service
+After=multi-user.target
+
+[Service]
+Type=idle
+StandardOutput=syslog
+StandardError=syslog
+TimeoutStartSec=15
+EnvironmentFile=/etc/rpi-security-environment
+ExecStartPre=/sbin/iw dev ${RPI_SEC_WLAN_ITFC} interface add ${RPI_SEC_MON} type monitor
+ExecStartPre=/sbin/ip link set ${RPI_SEC_MON} up
+ExecStart=/usr/local/bin/rpi-security.py
+ExecStop=/usr/bin/pkill rpi-security.py
+ExecStopPost=/sbin/iw dev ${RPI_SEC_MON} del
+
+[Install]
+WantedBy=multi-user.target
