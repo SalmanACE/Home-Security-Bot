@@ -1,5 +1,7 @@
 # Home Security Bot
 
+It's Team project and my team mate is [Jayakkavin E](https://github.com/Jayakkavin?tab=repositories)
+
 A simple security system to run on a [Raspberry Pi](https://www.raspberrypi.org/).
 
 Features:
